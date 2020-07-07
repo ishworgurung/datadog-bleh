@@ -4,14 +4,15 @@
 
 from datadog import initialize, api
 from datetime import timedelta, datetime
+import os,sys
 
 if __name__ == "__main__":
-    MUTE_FOR = timedelta(days=1, hours=12)  # adjust
+    MUTE_FOR = timedelta(hours=10)  # adjust
     MONITORS_PER_PAGE = 60
 
     options = {
-        'api_key': '1234',
-        'app_key': '1234'
+        'api_key': str(os.getenv("DD_API_KEY")),
+        'app_key': str(os.getenv("DD_APP_KEY"))
     }
 
     initialize(**options)
