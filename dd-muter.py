@@ -7,7 +7,7 @@ from datetime import timedelta, datetime
 import os,sys
 
 if __name__ == "__main__":
-    MUTE_FOR = timedelta(hours=10)  # adjust
+    MUTE_FOR = timedelta(hours=44, minutes=15)  # adjust
     MONITORS_PER_PAGE = 60
 
     options = {
@@ -36,11 +36,11 @@ if __name__ == "__main__":
                 })
 
     monitor_ttl = int((datetime.now() + MUTE_FOR).timestamp())
-    print(f"muting monitor POSIX timestamp: {monitor_ttl} (check https://www.epochconverter.com)")
+    print(f"monitor TTL as POSIX timestamp: {monitor_ttl} (check https://www.epochconverter.com)")
 
     # Mute all monitors with name that starts with '(dev)'
     for mon in mute_monitor_ids:
-        print(f"muting monitor name: {mon['name']} and id: {mon['id']} for 1d 12h")
+        print(f"muting monitor name: {mon['name']} and id: {mon['id']}")
         if mon['id'] != 0:
             response = api.Monitor.mute(mon['id'], end=monitor_ttl)
             if "errors" in response.keys():
